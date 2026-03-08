@@ -11,7 +11,7 @@ bool fileExists(string filename) {
     return file.is_open();
 }
 
-int main() {
+void lexer(string filename) {
     // Creamos los estados con su respectivo tipo
     State q0("q0", false, false, "inicio");
     State q1("q1", true, false, "integer");
@@ -96,19 +96,6 @@ int main() {
 
     Automaton automaton(&q0);
 
-    string filename;
-
-    bool processFileInput = true;
-    while (processFileInput) {
-        cout << "Give me the filename with your inputs: ";
-        cin >> filename;
-        cout << endl;
-        if (!fileExists(filename + ".txt"))
-            cout << "Enter a valid filename" << endl;
-        else
-            processFileInput = false;
-    }
-
     ifstream fileInput(filename + ".txt");
 
     if (!fileInput) {
@@ -131,6 +118,23 @@ int main() {
 
         fileInput.close();
     }
+}
+
+int main() {
+    string filename;
+
+    bool processFileInput = true;
+    while (processFileInput) {
+        cout << "Give me the filename with your inputs: ";
+        cin >> filename;
+        cout << endl;
+        if (!fileExists(filename + ".txt"))
+            cout << "Enter a valid filename" << endl;
+        else
+            processFileInput = false;
+    }
+
+    lexer(filename);
 
     return 0;
 }
