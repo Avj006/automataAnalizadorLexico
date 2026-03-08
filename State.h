@@ -22,7 +22,7 @@ public:
         {"*", "product"},
         {"-", "subtract"},
         {"/", "division"},
-        {"+", "addition"},
+        {"+", "sum"},
         {")", "right parenthesis"},
         {"(", "left parenthesis"}
     };
