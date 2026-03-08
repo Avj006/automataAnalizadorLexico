@@ -18,7 +18,7 @@ int main() {
 
     // Definimos nuestras clases de caracteres para facilitar las transiciones
     string digits[10] = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
-    string letters[26] = {"a", "b", "c", "d", "e", "f", "g", "h" "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
+    string letters[26] = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
     string operators[5] = {"+", "-", "=", "*", "/"};
     string parenthesis[2] = {"(", ")"};
     string space[1] = {" "};
@@ -60,7 +60,7 @@ int main() {
     //transiciones q4
     q4.auxiliarTablaHash(space, 1, &q4);            // espacio → q4
     q4.auxiliarTablaHash(digits, 10, &q1);          // 0-9 → q1
-    q4.auxiliarTablaHash(letters, 26, &theta);      // a-z → theta  
+    q4.auxiliarTablaHash(letters, 26, &q6);      // a-z → q6  
     q4.auxiliarTablaHash(point, 1, &theta);        // . → theta
     q4.auxiliarTablaHash(operators, 5, &q4);       // +,-,etc → q4
     q4.auxiliarTablaHash(parenthesis, 2, &q5);     // () → q5
@@ -90,13 +90,30 @@ int main() {
     theta.auxiliarTablaHash(parenthesis, 2, &theta);     // () → theta
     
     
-    // Creamos el autómata con un puntero al estado inicial "s"
-    //Automaton automaton(&s);
+    // Creamos el autómata con un puntero al estado inicial "q0"
+    Automaton automaton(&q0);
+//b=7
 
-    //string word = ""; // la cadena
+//tmp = 32.4 *(-8.6 - b)/       6.1
+
+//d = a ** b
+    string word = "tmp = 32.4 *(-8.6 - b)/       6.1"; // la cadena
     
-    // std::boolalpha hace que se imprima "true" o "false" en lugar de 1 o 0
-    //cout << boolalpha << automaton.accept(word) << endl;
+    //std::boolalpha hace que se imprima "true" o "false" en lugar de 1 o 0
+    cout << boolalpha << automaton.accept(word) << endl;
+
+
+    
+    /*
+    cout << q0.toString() << endl;
+    cout << q1.toString() << endl;
+    cout << q2.toString() << endl;
+    cout << q3.toString() << endl;
+    cout << q4.toString() << endl;
+    cout << q5.toString() << endl;
+    cout << q6.toString() << endl;
+    cout << theta.toString() << endl;
+    */
 
     return 0;
 }

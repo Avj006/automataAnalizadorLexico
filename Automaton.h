@@ -20,7 +20,7 @@ public:
                 result = true; 
             }
         } else {
-            // return false; // <-- Comentado para evitar el código inalcanzable
+             //return false; // <-- Comentado para evitar el código inalcanzable
         }
 
         State* currentState = s; 
