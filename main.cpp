@@ -123,8 +123,7 @@ int main() {
                 continue;
             }
 
-            cout << "Input " << lineNumber << "]: " << line << endl;
-            cout << "Result: " << boolalpha << automaton.accept(line);
+            cout << "Input " << lineNumber << ": " << line << endl;
             automaton.printTokens(line);
             cout << endl;
             lineNumber++;

@@ -115,10 +115,6 @@ bool runAutomaton(string word, bool printTokens){
 
 }
 
-bool accept(string word) {
-    return runAutomaton(word,false);
-}
-
 void printTokens(string word){
     runAutomaton(word,true);
 }
