@@ -31,9 +31,10 @@ result = true;
 State* currentState = s;
 
 string current_token = "";
+string current_token_type = "";
 
 if(printTokens){
-cout << "\nTabla de Tokens:" << endl;
+cout << "\n ⬇️ Output table\n" << endl;
 cout << "TOKEN\t\tTIPO" << endl;
 cout << "----------------------------------" << endl;
 }
@@ -46,8 +47,8 @@ State* nextState = currentState->getNextState(symbol);
 if (nextState == nullptr) {
 
 if(printTokens){
-if (!current_token.empty() && currentState->type != "inicio") {
-cout << current_token << "\t\t" << currentState->type << endl;
+if (!current_token.empty()) {
+cout << current_token << "\t\t" << current_token_type << endl;
 }
 }
 
@@ -57,8 +58,8 @@ return false;
 if (nextState->isDeathState) {
 
 if(printTokens){
-if (!current_token.empty() && currentState->type != "inicio") {
-cout << current_token << "\t\t" << currentState->type << endl;
+if (!current_token.empty()) {
+cout << current_token << "\t\t" << current_token_type << endl;
 }
 }
 
@@ -67,17 +68,31 @@ return false;
 
 if(printTokens){
 
-if (currentState->type != nextState->type) {
+string nextType = nextState->type;
 
-if (!current_token.empty() && currentState->type != "inicio") {
-cout << current_token << "\t\t" << currentState->type << endl;
-}
+bool isNumericTransition =
+(current_token_type == "integer" && nextType == "float") ||
+(current_token_type == "float" && nextType == "float");
 
+if (!current_token_type.empty() && nextType != current_token_type && !isNumericTransition) {
+
+cout << current_token << "\t\t" << current_token_type << endl;
 current_token = "";
+current_token_type = "";
 }
 
 if (symbol != " ") {
+
 current_token += symbol;
+
+if (current_token_type.empty()) {
+current_token_type = nextType;
+}
+
+if (current_token_type == "integer" && nextType == "float") {
+current_token_type = "float";
+}
+
 }
 
 }
@@ -92,8 +107,8 @@ currentState = nextState;
 }
 
 if(printTokens){
-if (!current_token.empty() && currentState->type != "inicio") {
-cout << current_token << "\t\t" << currentState->type << endl;
+if (!current_token.empty()) {
+cout << current_token << "\t\t" << current_token_type << endl;
 }
 }
 
