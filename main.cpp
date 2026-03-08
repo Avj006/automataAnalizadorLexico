@@ -90,7 +90,7 @@ int main() {
 
     Automaton automaton(&q0);
 
-    string word = "tmp = 32.4 *(-8.6 - b)/ 6.1";
+    string word = "tmp = 32.44 *(-8.6 - b)/ 6.1";
 
     cout << boolalpha << automaton.accept(word) << endl;
 
