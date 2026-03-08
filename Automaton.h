@@ -45,13 +45,13 @@ bool runAutomaton(string word, bool printTokens){
         State* nextState = currentState->getNextState(symbol);
 
         if (nextState == nullptr) {
-
             if(printTokens){
                 if (!current_token.empty()) {
                     cout << current_token << "\t\t" << current_token_type << endl;
                 }
             }
-            return false;
+            current_token = "";
+            continue;
         }
 
         if (nextState->isDeathState) {
@@ -60,8 +60,8 @@ bool runAutomaton(string word, bool printTokens){
                 cout << current_token << "\t\t" << current_token_type << endl;
                 }
             }
-
-            return false;
+            current_token = "";
+            continue;
         }
 
         if(printTokens){

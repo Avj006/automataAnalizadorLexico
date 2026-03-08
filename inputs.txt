@@ -1,3 +1,9 @@
+Ray + 9
+añonso
+rod8lfo
+andr.ea
+ang*ela
+ray()mundo
 b=7
 tmp = 32.4 *(-8.6 - b)/       6.1
 d = a ** b
