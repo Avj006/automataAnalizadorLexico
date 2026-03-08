@@ -88,7 +88,7 @@ bool runAutomaton(string word, bool printTokens){
                     current_token_type = "float";
                 }
 
-                if(current_token_type=="operador" || current_token_type=="parentesis"){
+                if(current_token_type=="operator" || current_token_type=="parenthesis"){
                     current_token_type = nextState->HashTableSymbolIdentifier[current_token];
                 }
                 

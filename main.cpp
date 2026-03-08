@@ -11,8 +11,8 @@ int main() {
     State q1("q1", true, false, "integer");
     State q2("q2", false, false, "integer");   // punto decimal: sigue siendo parte de un numero
     State q3("q3", true, false, "float");
-    State q4("q4", true, false, "operador");
-    State q5("q5", true, false, "parentesis");
+    State q4("q4", true, false, "operator");
+    State q5("q5", true, false, "parenthesis");
     State q6("q6", true, false, "variable");
     State theta("theta", false, true, "Dead state");
 
