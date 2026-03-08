@@ -11,7 +11,9 @@ public:
     bool isFinal;
     bool isDeathState;
     string type; // Atributo para guardar el tipo de token
+    //HASH TABLES
     unordered_map<string, State*> transitions;
+
 
     // Se agrega 'type' como cuarto parámetro en el constructor
     State(string name, bool isFinal, bool isDeathState, string type) {
@@ -44,6 +46,18 @@ public:
             this->addTransition(tipoInput[i], proxEstado);  
         }
     }
+
+    //hash table para los operadores y los parentesis
+    unordered_map<string, string> HashTableSymbolIdentifier{ //ESTADO q4 y q5
+        {"=", "assignment"},
+        {"*", "product"},
+        {"-", "subtract"},
+        {"/", "division"},
+        {"+", "addition"},
+        {")", "right parenthesis"},
+        {"(", "left parenthesis"}
+    };
+
 };
 
 #endif

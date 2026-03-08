@@ -51,7 +51,6 @@ bool runAutomaton(string word, bool printTokens){
                     cout << current_token << "\t\t" << current_token_type << endl;
                 }
             }
-
             return false;
         }
 
@@ -68,9 +67,7 @@ bool runAutomaton(string word, bool printTokens){
         if(printTokens){
             string nextType = nextState->type;
 
-            bool isNumericTransition =
-            (current_token_type == "integer" && nextType == "float") ||
-            (current_token_type == "float" && nextType == "float");
+            bool isNumericTransition = (current_token_type == "integer" && nextType == "float") || (current_token_type == "float" && nextType == "float");
 
             if (!current_token_type.empty() && nextType != current_token_type && !isNumericTransition) {
 
@@ -91,6 +88,10 @@ bool runAutomaton(string word, bool printTokens){
                     current_token_type = "float";
                 }
 
+                if(current_token_type=="operador" || current_token_type=="parentesis"){
+                    current_token_type = nextState->HashTableSymbolIdentifier[current_token];
+                }
+                
             }
 
         }
