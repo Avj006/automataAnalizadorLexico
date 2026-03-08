@@ -1,9 +1,15 @@
+#include <fstream>
 #include <iostream>
 #include <string>
 #include "State.h"
 #include "Automaton.h"
 
 using namespace std;
+
+bool fileExists(string filename) {
+    ifstream file(filename);
+    return file.is_open();
+}
 
 int main() {
     // Creamos los estados con su respectivo tipo
@@ -90,12 +96,42 @@ int main() {
 
     Automaton automaton(&q0);
 
-    string word = "tmp = 32.4 *(-8.6 - b)/ 6.1";
+    string filename;
 
-    cout << boolalpha << automaton.accept(word) << endl;
+    bool processFileInput = true;
+    while (processFileInput) {
+        cout << "Give me the filename with your inputs: ";
+        cin >> filename;
+        cout << endl;
+        if (!fileExists(filename + ".txt"))
+            cout << "Enter a valid filename" << endl;
+        else
+            processFileInput = false;
+    }
 
-    // ---- TABLITA ----
-    automaton.printTokens(word);
+    ifstream fileInput(filename + ".txt");
+
+    if (!fileInput) {
+        cerr << "Error opening text file" << endl;
+    } else {
+        string line;
+        int lineNumber = 1;
+
+        while (getline(fileInput, line)) {
+            if (line.empty()) {
+                lineNumber++;
+                continue;
+            }
+
+            cout << "Input " << lineNumber << "]: " << line << endl;
+            cout << "Result: " << boolalpha << automaton.accept(line);
+            automaton.printTokens(line);
+            cout << endl;
+            lineNumber++;
+        }
+
+        fileInput.close();
+    }
 
     return 0;
 }
