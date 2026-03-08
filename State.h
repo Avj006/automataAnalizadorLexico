@@ -10,35 +10,35 @@ public:
     string name;
     bool isFinal;
     bool isDeathState;
+    string type; // Atributo para guardar el tipo de token
     unordered_map<string, State*> transitions;
 
-
-    State(string name, bool isFinal, bool isDeathState) {
+    // Se agrega 'type' como cuarto parámetro en el constructor
+    State(string name, bool isFinal, bool isDeathState, string type) {
         this->name = name;
         this->isFinal = isFinal;
         this->isDeathState = isDeathState;
+        this->type = type; 
     }
 
     void addTransition(string symbol, State* state) {
-        // Añade la transición al mapa
         this->transitions[symbol] = state; 
     }
 
     State* getNextState(string symbol) {
-        // En C++, buscamos si el símbolo existe para no crear entradas vacías
         if (this->transitions.find(symbol) != this->transitions.end()) {
             return this->transitions[symbol];
         }
-        return nullptr; // Equivalente a null en Java
+        return nullptr; 
     }
 
     string toString() {
         return "name: " + this->name + 
                ", isFinal: " + (this->isFinal ? "true" : "false") + 
-               ", isDeathState: " + (this->isDeathState ? "true" : "false");
+               ", isDeathState: " + (this->isDeathState ? "true" : "false") +
+               ", type: " + this->type;
     }
 
-    // Agregar todas las transiciones de una categoría
     void auxiliarTablaHash(const string tipoInput[], int size, State* proxEstado) {
         for (int i = 0; i < size; i++) {
             this->addTransition(tipoInput[i], proxEstado);  
