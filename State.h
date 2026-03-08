@@ -41,7 +41,7 @@ public:
                ", type: " + this->type;
     }
 
-    void auxiliarTablaHash(const string tipoInput[], int size, State* proxEstado) {
+    void hashTableAux(const string tipoInput[], int size, State* proxEstado) {
         for (int i = 0; i < size; i++) {
             this->addTransition(tipoInput[i], proxEstado);  
         }
