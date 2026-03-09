@@ -6,58 +6,60 @@
 using namespace std;
 
 class State {
-public:
-    string name;
-    bool isFinal;
-    bool isDeathState;
-    string type; // Atributo para guardar el tipo de token
-    //HASH TABLES
+    public:
+        string name; //ej. q0, q1, etc...
+        bool isFinal; //¿es final?
+        bool isDeathState; //¿es estado muerto?
+        string type; // Atributo para guardar el tipo de token leido
 
-    //hash table para transiciones de cada node
-    unordered_map<string, State*> transitions;
-    
-    //hash table para los operadores y los parentesis
-    unordered_map<string, string> HashTableSymbolIdentifier{ //ESTADO q4 y q5
-        {"=", "assignment"},
-        {"*", "product"},
-        {"-", "subtract"},
-        {"/", "division"},
-        {"+", "sum"},
-        {")", "right parenthesis"},
-        {"(", "left parenthesis"}
-    };
+        //hash table para transiciones de cada nodo
+        unordered_map<string, State*> transitions;
+        
+        //hash table para los operadores y los parentesis: accede segun el key (token detectado)
+        unordered_map<string, string> HashTableSymbolIdentifier{ //ESTADO q4 y q5
+            {"=", "assignment"},
+            {"*", "product"},
+            {"-", "subtract"},
+            {"/", "division"},
+            {"+", "sum"},
+            {")", "right parenthesis"},
+            {"(", "left parenthesis"}
+        };
 
-    // Se agrega 'type' como cuarto parámetro en el constructor
-    State(string name, bool isFinal, bool isDeathState, string type) {
-        this->name = name;
-        this->isFinal = isFinal;
-        this->isDeathState = isDeathState;
-        this->type = type; 
-    }
-
-    void addTransition(string symbol, State* state) {
-        this->transitions[symbol] = state; 
-    }
-
-    State* getNextState(string symbol) {
-        if (this->transitions.find(symbol) != this->transitions.end()) {
-            return this->transitions[symbol];
+        //Constructor
+        State(string name, bool isFinal, bool isDeathState, string type) {
+            this->name = name;
+            this->isFinal = isFinal;
+            this->isDeathState = isDeathState;
+            this->type = type; 
         }
-        return nullptr; 
-    }
 
-    string toString() {
-        return "name: " + this->name + 
-               ", isFinal: " + (this->isFinal ? "true" : "false") + 
-               ", isDeathState: " + (this->isDeathState ? "true" : "false") +
-               ", type: " + this->type;
-    }
+        //Inicializar la hash table de cada estado con sus respectivas relaciones con otros estadoss
+        void addTransition(string symbol, State* state) {
+            this->transitions[symbol] = state; 
+        }
 
-    void hashTableAux(const string tipoInput[], int size, State* proxEstado) {
+        // transicion al siguiente estado :)
+        State* getNextState(string symbol) {
+            if (this->transitions.find(symbol) != this->transitions.end()) {
+                return this->transitions[symbol]; //este es el que recorre con apoyyo de las transiciones que hicimos (hash table)
+            }
+            return nullptr; 
+        }
+
+        /* Codigo hecho en clase
+        string toString() {
+            return "name: " + this->name + 
+                ", isFinal: " + (this->isFinal ? "true" : "false") + 
+                ", isDeathState: " + (this->isDeathState ? "true" : "false") +
+                ", type: " + this->type;
+        }*/
+        
+        void hashTableAux(const string tipoInput[], int size, State* proxEstado) { // funcion para agregar transiciones a la hash table de cada estado con los respectivos carácteres válidos 
         for (int i = 0; i < size; i++) {
-            this->addTransition(tipoInput[i], proxEstado);  
+                this->addTransition(tipoInput[i], proxEstado);  //usa los arreglos declarados en el main
+            }
         }
-    }
 };
 
 #endif
